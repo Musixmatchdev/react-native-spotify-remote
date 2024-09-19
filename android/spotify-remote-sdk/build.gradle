@@ -1,14 +1,14 @@
-val compileSDKVersion = 31
-val minSDKVersion = 21
-val targetSDKVersion = 31
-
-fun safeExtGet(prop: String, fallback: Int): Int {
-    return if (rootProject.extra.has(prop)) rootProject.extra.get(prop) as Int else fallback
-}
-
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+}
+
+def compileSDKVersion = 31
+def minSDKVersion = 21
+def targetSDKVersion = 31
+
+def safeExtGet(prop, fallback) {
+    rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
 }
 
 android {
@@ -17,21 +17,28 @@ android {
     defaultConfig {
         minSdk = safeExtGet("minSdkVersion", minSDKVersion)
         //noinspection ExpiredTargetSdkVersion
-        targetSdk = safeExtGet("targetSdkVersion", minSDKVersion)
+        targetSdk = safeExtGet("targetSdkVersion", targetSDKVersion)
 
         versionCode = 1
         versionName = "1.0"
     }
 
-    @Suppress("UnstableApiUsage")
-    lintOptions {
-        disable("GradleCompatible")
+    buildTypes {
+        debug {
+            minifyEnabled false
+            debuggable true
+        }
+        release {
+            minifyEnabled false
+            debuggable false
+        }
     }
-
-    @Suppress("UnstableApiUsage")
+    lintOptions {
+        disable 'GradleCompatible'
+    }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
