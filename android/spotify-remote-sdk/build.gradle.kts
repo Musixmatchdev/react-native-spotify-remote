@@ -1,20 +1,26 @@
+val compileSDKVersion = 31
+val minSDKVersion = 21
+val targetSDKVersion = 31
+
+fun safeExtGet(prop: String, fallback: Int): Int {
+    return if (rootProject.extra.has(prop)) rootProject.extra.get(prop) as Int else fallback
+}
+
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
 }
 
 android {
-    compileSdk = 31
+    compileSdk = safeExtGet("compileSdkVersion", compileSDKVersion)
 
     defaultConfig {
-        minSdk = 21
+        minSdk = safeExtGet("minSdkVersion", minSDKVersion)
+        //noinspection ExpiredTargetSdkVersion
+        targetSdk = safeExtGet("targetSdkVersion", minSDKVersion)
+
         versionCode = 1
         versionName = "1.0"
-    }
-
-    java {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
     }
 
     buildTypes {
@@ -36,7 +42,7 @@ android {
     @Suppress("UnstableApiUsage")
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
-                targetCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
 }
 
