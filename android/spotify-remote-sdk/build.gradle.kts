@@ -8,6 +8,35 @@ android {
 
     defaultConfig {
         minSdk = 21
+        versionCode = 1
+        versionName = "1.0"
+    }
+
+    java {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    buildTypes {
+        getByName("release")  {
+            isMinifyEnabled = false
+            isDebuggable = false
+        }
+
+        getByName("debug") {
+            isDebuggable = true
+        }
+    }
+
+    @Suppress("UnstableApiUsage")
+    lintOptions {
+        disable("GradleCompatible")
+    }
+
+    @Suppress("UnstableApiUsage")
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+                targetCompatibility = JavaVersion.VERSION_1_8
     }
 }
 
