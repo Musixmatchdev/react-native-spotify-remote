@@ -23,17 +23,6 @@ android {
         versionName = "1.0"
     }
 
-    buildTypes {
-        getByName("release")  {
-            isMinifyEnabled = false
-            isDebuggable = false
-        }
-
-        getByName("debug") {
-            isDebuggable = true
-        }
-    }
-
     @Suppress("UnstableApiUsage")
     lintOptions {
         disable("GradleCompatible")
