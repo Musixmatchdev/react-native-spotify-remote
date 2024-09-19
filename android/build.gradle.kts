@@ -1,5 +1,11 @@
-plugins {
-    id("com.android.library") version "4.2.1" apply false
-    id("com.android.application") version "4.2.1" apply false
-    id("org.jetbrains.kotlin.android") version "1.4.21" apply false
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+    dependencies {
+        classpath("com.android.tools.build:gradle:4.2.1")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.21")
+    }
 }
